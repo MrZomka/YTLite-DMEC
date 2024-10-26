@@ -122,7 +122,7 @@ jobs:
       - name: Clone DontEatMyContent
         run: |
           cd ${{ github.workspace }}
-          git clone --quiet --depth=1 https://github.com/therealFoxster/DontEatMyContent.git
+          git clone --recurse-submodules --quiet --depth=1 https://github.com/therealFoxster/DontEatMyContent.git
 
       - name: Build YouPiP
         run: |
