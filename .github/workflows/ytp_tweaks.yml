@@ -104,11 +104,6 @@ jobs:
         env:
           THEOS: ${{ github.workspace }}/theos
 
-      - name: Clone YouPiP
-        run: |
-          cd ${{ github.workspace }}
-          git clone --quiet --depth=1 https://github.com/PoomSmart/YouPiP.git
-
       - name: Clone YTUHD
         run: |
           cd ${{ github.workspace }}
@@ -123,14 +118,6 @@ jobs:
         run: |
           cd ${{ github.workspace }}
           git clone --recurse-submodules --quiet --depth=1 https://github.com/therealFoxster/DontEatMyContent.git
-
-      - name: Build YouPiP
-        run: |
-          cd ${{ github.workspace }}/YouPiP
-          make clean package DEBUG=0 FINALPACKAGE=1
-          mv packages/*.deb ${{ github.workspace }}/youpip.deb
-        env:
-          THEOS: ${{ github.workspace }}/theos
 
       - name: Build YTUHD
         run: |
@@ -155,6 +142,10 @@ jobs:
           mv packages/*.deb ${{ github.workspace }}/demc.deb
         env:
           THEOS: ${{ github.workspace }}/theos
+
+      - name: Download pre-built YouPIP (bandaid fix)
+        run: |
+          wget "https://github.com/PoomSmart/PoomSmart.github.io/raw/refs/heads/main/repo/debs/youtube/youpip/com.ps.youpip_1.8.9_iphoneos-arm.deb" --no-verbose -O ${{ github.workspace }}/youpip.deb
 
       - name: Inject tweaks into IPA
         run: |
